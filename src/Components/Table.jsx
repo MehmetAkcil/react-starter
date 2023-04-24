@@ -1,8 +1,8 @@
-
+import { PropTypes } from 'prop-types';
 import DataTable from 'react-data-table-component';
 
 
-export default function Table({ dataList, columns }) {
+const Table = ({ dataList, columns }) => {
 
     const customStyles = {
         table: {
@@ -84,3 +84,11 @@ export default function Table({ dataList, columns }) {
         </>
     )
 }
+
+
+Table.propTypes = {
+    dataList: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired
+}
+
+export default Table;

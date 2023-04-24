@@ -1,5 +1,5 @@
 
-import Layout from "../Components/Layout";
+import Layout from "../Components/Layouts";
 
 import { Navigate } from "react-router-dom";
 
@@ -9,7 +9,7 @@ function AuthFilter() {
 
   const { userData } = useSelector(state => state.AuthStore);
 
-  return userData ? <Layout /> : <Navigate to="/login" />
+  return userData ? <Layout /> : <Navigate to={`/login`} />
 
 
 }

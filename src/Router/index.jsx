@@ -1,33 +1,45 @@
-import {
-    createBrowserRouter,
-} from "react-router-dom";
+import { createBrowserRouter, } from "react-router-dom";
 import Home from "../Pages/Home";
+import RootLayout from "../Components/Layouts";
 import AuthFilter from "../Filters/AuthFilter";
-import Panel from "../Pages/Panel";
+import Profile from "../Pages/Profile";
 import Login from "../Pages/Login";
-import Logout from "../Pages/Logout";
+import Logout from "../Pages/Profile/Logout";
+import LoginFilter from "../Filters/LoginFilter";
 
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
-    },
-    {
-        path: "/login",
-        element: <Login />,
-    },
-    {
-        path: "/panel",
-        element: <AuthFilter />,
+        element: <RootLayout />,
         children: [
             {
                 path: '',
-                element: <Panel />
+                element: <Home />
             },
             {
-                path: 'logout',
-                element: <Logout />
+                path: "/login",
+                element: <LoginFilter />,
+                children: [
+                    {
+                        path: '',
+                        element: <Login />
+                    }
+                ]
+            },
+            {
+                path: `/${import.meta.env.VITE_PANEL_URL}`,
+                element: <AuthFilter />,
+                children: [
+                    {
+                        path: '',
+                        element: <Profile />
+                    },
+                    {
+                        path: "logout",
+                        element: <Logout />
+                    }
+                ]
             }
         ]
-    },
+    }
 ]);
