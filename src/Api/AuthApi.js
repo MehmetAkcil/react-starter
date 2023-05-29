@@ -1,7 +1,7 @@
 import axios from './axios'
 import { toastError, toastSuccess } from "../Utils/toast";
 
-export const offlineLoginUser = async (email, password, dispatch, login, navigate) => {
+export const offlineLoginUser = async (email, password, dispatch, login) => {
 
     const emailENV = import.meta.env.VITE_API_EMAIL
     const passwordENV = import.meta.env.VITE_API_PASSWORD
@@ -11,9 +11,8 @@ export const offlineLoginUser = async (email, password, dispatch, login, navigat
         return;
     }
 
-    dispatch(login({ 'status': true }));
+    dispatch(login({ token: "token", data: { name: "Admin" } }));
     toastSuccess('Giris basarili.');
-    navigate('/panel');
     setTimeout(() => {
         window.location.reload();
     }, 500)

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { offlineLoginUser } from '../../Api/AuthApi';
 import { login as reduxLogin } from '../../Store/AuthStore';
 import { validEmail } from '../../Utils/Validate';
@@ -12,7 +11,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const handleSubmit = () => {
         if (email === '' || password === '') {
@@ -27,7 +25,7 @@ const Login = () => {
             return toastError('Şifreniz en az 6 karakter olmalıdır.');
         }
 
-        offlineLoginUser(email, password, dispatch, reduxLogin, navigate)
+        offlineLoginUser(email, password, dispatch, reduxLogin)
     }
 
 
