@@ -1,9 +1,43 @@
 import axios from './axios'
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { toastError, toastSuccess } from "../Utils/toast";
 
-export const loginUser = createAsyncThunk("auth/login", async ({ email, password }) => {
+export const offlineLoginUser = async (email, password, dispatch, login, navigate) => {
 
-    const response = await axios.post(`User?Mail=${email}&Password=${password}`);
+    const emailENV = import.meta.env.VITE_API_EMAIL
+    const passwordENV = import.meta.env.VITE_API_PASSWORD
 
-    return response.data;
-});
+    if(emailENV !== email || passwordENV !== password){
+        toastError('Kullanici adi veya sifre hatali.');
+        return;
+    }
+
+    dispatch(login({ 'status': true }));
+    toastSuccess('Giris basarili.');
+    navigate('/panel');
+    setTimeout(() => {
+        window.location.reload();
+    }, 500)
+
+};
+
+
+export const onlineLoginUser = async (email, password, dispatch, login, navigate) => {
+
+    const formData = new FormData();
+
+    formData.append('email', email);
+    formData.append('password', password);
+
+    try {
+        const response = await axios.post('auth/login', formData);
+        dispatch(login(response.data));
+        toastSuccess('Giris basarili.');
+        navigate('/panel');
+        setTimeout(() => {
+            window.location.reload();
+        }, 500)
+    } catch (e) {
+        toastError('Hatali giris yaptiniz. Lutfen bilgilerinizi kontrol ediniz.')
+    }
+
+};

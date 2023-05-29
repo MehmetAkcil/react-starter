@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser } from '../Api/AuthApi';
+
+
 
 const initialState = {
-  userData: localStorage.getItem('user') ?? false, // for user object
-  token: localStorage.getItem('token') ?? false,
+  userData: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : false, // for user object
+  token: localStorage.getItem('token') ? localStorage.getItem('token') : false,
   status: null,
   error: null
 }
@@ -12,24 +13,23 @@ const initialState = {
 export const AuthStore = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(loginUser.pending, (state) => {
-        state.status = 'loading';
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.userData = action.payload.data;
-        state.token = action.payload.token;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.error.message;
-      });
+  reducers: {
+    login: async (state, action) => {
+      console.log(action.payload)
+      state.userData = action.payload.data;
+      state.token = action.payload.token;
+      localStorage.setItem('user', JSON.stringify(action.payload.data));
+      localStorage.setItem('token', action.payload.token);
+    },
+    logout: (state) => {
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      state.userData = false;
+      state.token = false;
+    }
   }
 });
 
 
-export const { userData, token, status, error } = AuthStore.actions;
+export const { login, logout } = AuthStore.actions;
 export default AuthStore.reducer;
