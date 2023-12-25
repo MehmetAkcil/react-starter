@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,300;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;0,6..12,1000;1,6..12,200;1,6..12,300;1,6..12,400;1,6..12,500;1,6..12,600;1,6..12,700;1,6..12,800;1,6..12,900;1,6..12,1000&display=swap');
+
+
+* {
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+
+.menu-list {
+  .item {
+    a:hover {
+      transition: all 0.3s ease-in-out;
+
+      .icon {
+        transition: none;
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+
+.d3-btn {
+  box-shadow: inset 2px 2px 6px 3px #9c4e24;
+}
+
+.ql-editor {
+  height: 300px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-200
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-400
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500
+}
+
+
+.all-block {
+  div {
+    display: block;
+
+    a {
+      display: block;
+      @apply mb-3
+    }
+  }
+}
+
+.app-table-head-item {
+  @apply text-start py-2 px-4
+}
+
+
+.app-table-body-item {
+  @apply text-start py-2 px-4
+}
+
+.app-table-head-item, .app-table-body-item {
+  @apply border border-gray-200
+}
+
+.app-table-body:nth-child(even) {
+  @apply bg-gray-50
+}
+
+
+.app-table-body:nth-child(odd) {
+  @apply bg-white
+}
+
+
+.app-input {
+  @apply border border-gray-200 rounded-md px-3 py-2 w-full hover:border-gray-300 focus:outline-none focus:border-gray-400
+}
+
+
+.ql-editor {
+  min-height: 300px !important;
+  overflow: hidden;
+  overflow-y: scroll;
+  overflow-x: scroll;
+}
+
+.ql-container {
+   height: auto !important;
+ }
+
+.ql-editor {
+  height: auto !important;
+}
